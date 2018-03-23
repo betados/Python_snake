@@ -100,12 +100,13 @@ while True:
         if event.type == KEYUP:
             key_pressed = None
 
-    check_food(snake)
-    move_snake(snake)
-    draw(screen, snake, food)
     if check_collisions(snake):
         game_over(screen)
-        break
+    else:
+        check_food(snake)
+        move_snake(snake)
+        draw(screen, snake, food)
+        
     pygame.display.flip()
 
 pygame.display.flip()
