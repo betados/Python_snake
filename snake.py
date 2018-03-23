@@ -107,3 +107,11 @@ while True:
         game_over(screen)
         break
     pygame.display.flip()
+
+pygame.display.flip()
+while True:
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit(0)
+
