@@ -10,6 +10,7 @@ GREEN = (0, 255, 0)
 N_CUADROS = 40
 RAD = 6
 
+
 def move_snake(snake):
     global keys
     if (snake["dir"] == "up" or snake["dir"] == "down") and K_LEFT in keys:
@@ -35,7 +36,7 @@ def enlarge_snake(snake):
 def generate_food():
     x = random.randrange(1, N_CUADROS - 1)
     y = random.randrange(1, N_CUADROS - 1)
-    return 2 * RAD *x, 2 * RAD *y
+    return 2 * RAD * x, 2 * RAD * y
 
 
 def check_food(snake):
@@ -68,16 +69,17 @@ def check_collisions(snake):
 def game_over(screen):
     font = pygame.font.SysFont('Arial', RAD * 8, bold=True)
     text = font.render('Game Over', 0, RED)
-    pos = (7*2*RAD, (N_CUADROS - 4)*RAD)
+    pos = (7 * 2 * RAD, (N_CUADROS - 4) * RAD)
     screen.blit(text, pos)
 
 
 pygame.init()
 clock = pygame.time.Clock()
-screen = pygame.display.set_mode((N_CUADROS*2 * RAD, N_CUADROS*2 * RAD))
+screen = pygame.display.set_mode((N_CUADROS * 2 * RAD, N_CUADROS * 2 * RAD))
 
 snake = {"dir": "right", "rings":
-        [(12*2 * RAD, 13*2 * RAD), (12*2 * RAD, 12*2 * RAD), (12*2 * RAD, 11*2 * RAD), (12*2 * RAD, 10*2 * RAD)]}
+    [(12 * 2 * RAD, 13 * 2 * RAD), (12 * 2 * RAD, 12 * 2 * RAD), (12 * 2 * RAD, 11 * 2 * RAD),
+     (12 * 2 * RAD, 10 * 2 * RAD)]}
 food = generate_food()
 
 draw(screen, snake, food)
