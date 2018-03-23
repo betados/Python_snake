@@ -12,14 +12,14 @@ RAD = 6
 
 
 def move_snake(snake):
-    global keys
-    if (snake["dir"] == "up" or snake["dir"] == "down") and K_LEFT in keys:
+    global key_pressed
+    if snake["dir"] != "right" and K_LEFT == key_pressed:
         snake["dir"] = "left"
-    elif (snake["dir"] == "up" or snake["dir"] == "down") and K_RIGHT in keys:
+    elif snake["dir"] != "left" and K_RIGHT == key_pressed:
         snake["dir"] = "right"
-    elif (snake["dir"] == "left" or snake["dir"] == "right") and K_UP in keys:
+    elif snake["dir"] != "down" and K_UP == key_pressed:
         snake["dir"] = "up"
-    elif (snake["dir"] == "left" or snake["dir"] == "right") and K_DOWN in keys:
+    elif snake["dir"] != "up" and K_DOWN == key_pressed:
         snake["dir"] = "down"
     snake["rings"].pop()
     x = snake["rings"][0][0] + 2 * RAD * DIR[snake["dir"]][0]
@@ -85,7 +85,7 @@ food = generate_food()
 draw(screen, snake, food)
 pygame.display.flip()
 
-keys = []
+key_pressed = None
 
 while True:
 
@@ -96,9 +96,9 @@ while True:
             pygame.quit()
             sys.exit(0)
         if event.type == KEYDOWN:
-            keys.append(event.key)
+            key_pressed = event.key
         if event.type == KEYUP:
-            keys.remove(event.key)
+            key_pressed = None
 
     check_food(snake)
     move_snake(snake)
@@ -107,10 +107,3 @@ while True:
         game_over(screen)
         break
     pygame.display.flip()
-
-pygame.display.flip()
-while True:
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit(0)
